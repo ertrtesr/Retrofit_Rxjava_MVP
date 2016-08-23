@@ -57,14 +57,14 @@ public class RetrofitManager {
             url = baseUrl;
         }
         if (httpCacheDirectory == null) {
-            httpCacheDirectory = new File(context.getCacheDir(), "tamic_cache");
+            httpCacheDirectory = new File(context.getCacheDir(), "retrofit_cache");
         }
         try {
             if (cache == null) {
                 cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);        //创建10MB的缓存空间
             }
         } catch (Exception e) {
-            Log.e("OKHttp", "Could not create http cache", e);
+            Log.e("OkHttp", "Could not create http cache", e);
         }
 
         Map<String, String> headers = null;
