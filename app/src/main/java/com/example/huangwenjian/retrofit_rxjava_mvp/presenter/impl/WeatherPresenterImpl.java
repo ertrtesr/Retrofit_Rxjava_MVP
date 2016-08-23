@@ -10,8 +10,8 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.view.interfaces.IWeatherView
 /**
  * 作者: huangwenjian
  * -
- * 描述:
- * -~
+ * 描述: Presenter的实现类,重写接口的方法
+ * -
  * 日期: 16/8/22
  */
 public class WeatherPresenterImpl extends BaseNetCallback<WeatherBean> implements IWeatherPresenter {
@@ -24,9 +24,12 @@ public class WeatherPresenterImpl extends BaseNetCallback<WeatherBean> implement
         mModel = new WeatherModelImpl(this);
     }
 
+    /**
+     * 此处做网络请求
+     */
     @Override
     public void getWeather() {
-        mModel.getWeather();
+        mModel.getWeather();        //由model层发起网络请求
     }
 
 
