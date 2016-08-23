@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
  * 日期: 16/8/23
  */
 public class APIWrapper {
-    public static APIService apiService;
+    public static  APIService apiService;
     private static Subscription subscription;
 
     static {

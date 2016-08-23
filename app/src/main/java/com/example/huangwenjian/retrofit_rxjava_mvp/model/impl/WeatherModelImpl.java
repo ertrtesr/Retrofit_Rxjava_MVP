@@ -25,7 +25,7 @@ public class WeatherModelImpl implements IWeatherModel {
      */
     @Override
     public void getWeather() {
-//        APIService service = RetrofitManager.getInstance(UIUtils.getActivity()).createService(APIService.class);
+        //        APIService service = RetrofitManager.getInstance(UIUtils.getActivity()).createService(APIService.class);
         APIWrapper.doApi(APIWrapper.apiService.getWeatherInfo(), new BaseSubscriber<WeatherBean>(mCallback));     //getWeatherInfo()是APIService中的方法
     }
 }

@@ -34,7 +34,12 @@ public class UserPresenterImpl extends BaseNetCallback<UserBean> implements IUse
     }
 
     @Override
-    public void getUser() {
-        mModel.getUser();
+    public void setData(String name) {
+
+    }
+
+    @Override
+    public void getUser(String name) {
+        mModel.getUser(name);
     }
 }

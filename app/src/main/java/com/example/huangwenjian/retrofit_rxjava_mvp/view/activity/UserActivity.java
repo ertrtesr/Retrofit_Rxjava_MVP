@@ -1,6 +1,7 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +31,9 @@ public class UserActivity extends Activity implements IUserView<UserBean> {
     @BindView(R.id.tv_show_user)
     TextView mTv_show_user;
 
+    @BindView(R.id.btn_enter_xlist)
+    Button mBtn_enter_xlist;
+
     private IUserPresenter mUserPresenter;
 
     @Override
@@ -49,7 +53,13 @@ public class UserActivity extends Activity implements IUserView<UserBean> {
     @OnClick(R.id.btn_get_user)
     public void click() {
         //请求网络
-        mUserPresenter.getUser();
+        mUserPresenter.getUser("jianhuang");
+    }
+
+    @OnClick(R.id.btn_enter_xlist)
+    public void enterXlist() {
+        Intent intent = new Intent(this, XListviewActivity.class);
+        startActivity(intent);
     }
 
     @Override

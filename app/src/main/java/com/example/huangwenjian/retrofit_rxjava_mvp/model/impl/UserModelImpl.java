@@ -24,8 +24,8 @@ public class UserModelImpl implements IUserModel {
     }
 
     @Override
-    public void getUser() {
+    public void getUser(String name) {
         APIService service = RetrofitManager.getInstance(UIUtils.getActivity(), "http://myclients.duapp.com/").createService(APIService.class);
-        APIWrapper.doApi(service.getUserInfo("jianhuang"), new BaseSubscriber(mCallback));
+        APIWrapper.doApi(service.getUserInfo(name), new BaseSubscriber(mCallback));
     }
 }

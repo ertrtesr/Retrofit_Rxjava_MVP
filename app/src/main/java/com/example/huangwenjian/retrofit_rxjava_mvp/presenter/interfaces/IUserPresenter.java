@@ -8,5 +8,6 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.presenter.interfaces;
  * 日期: 16/8/23
  */
 public interface IUserPresenter {
-    void getUser();
+    void setData(String name);
+    void getUser(String name);
 }

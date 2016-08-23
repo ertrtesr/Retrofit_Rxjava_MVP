@@ -8,5 +8,5 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.model.interfaces;
  * 日期: 16/8/23
  */
 public interface IUserModel {
-    void getUser();
+    void getUser(String name);
 }
