@@ -12,7 +12,7 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.utils.UIUtils;
 /**
  * 作者: huangwenjian
  * -
- * 描述:
+ * 描述: model层实现类
  * -
  * 日期: 16/8/22
  */
@@ -23,6 +23,9 @@ public class WeatherModelImpl implements IWeatherModel {
         mCallback = callback;
     }
 
+    /**
+     * 获取天气信息的方法
+     */
     @Override
     public void getWeather() {
         APIService service = RetrofitManager.getInstance(UIUtils.getActivity()).createService(APIService.class);
