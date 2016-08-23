@@ -1,5 +1,8 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.api;
 
+import com.example.huangwenjian.retrofit_rxjava_mvp.manager.RetrofitManager;
+import com.example.huangwenjian.retrofit_rxjava_mvp.utils.UIUtils;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -9,12 +12,17 @@ import rx.schedulers.Schedulers;
 /**
  * 作者: huangwenjian
  * -
- * 描述: 访问网络的工具类
+ * 描述: 访问网络的API包装类
  * -
  * 日期: 16/8/23
  */
 public class APIWrapper {
-    private static Subscription msub;
+    public static APIService apiService;
+    private static Subscription subscription;
+
+    static {
+        apiService = RetrofitManager.getInstance(UIUtils.getActivity()).createService(APIService.class);
+    }
 
     /**
      * 访问网络并进行数据转换的操作
@@ -23,7 +31,7 @@ public class APIWrapper {
      * @param subscriber 订阅者
      */
     public static void doApi(Observable observable, Subscriber subscriber) {
-        msub = observable
+        subscription = observable
                 .subscribeOn(Schedulers.io())                   //这连续几个方法都是RxJava里面的
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())      //AndroidSchedulers是RxAndroid里面的类;
@@ -34,9 +42,9 @@ public class APIWrapper {
      * 该方法用于取消订阅
      */
     public static void cancel() {
-        if (!msub.isUnsubscribed()) {
-            msub.unsubscribe();
+        if (!subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
         }
-        msub = null;
+        subscription = null;
     }
 }
