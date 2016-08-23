@@ -1,8 +1,21 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.manager;
 
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.example.huangwenjian.retrofit_rxjava_mvp.api.APIService;
+import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.BaseInterceptor;
+import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.CaheInterceptor;
+
+import java.io.File;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
+import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -10,41 +23,100 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * 作者: huangwenjian
  * -
- * 描述:Retrofit管理类
+ * 描述: Retrofit管理类
  * -
  * 日期: 16/8/22
  */
 public class RetrofitManager {
+    private static Context mContext;
     private static RetrofitManager mInstance;
-    private OkHttpClient okHttpClient;
     private Retrofit retrofit;
+    private static final int DEFAULT_TIMEOUT = 10000;
+    private APIService apiService;
+    private static OkHttpClient okHttpClient;
+    private static String baseUrl = APIService.BASE_URL;
+    private Cache cache = null;
+    private File httpCacheDirectory;
 
     private RetrofitManager() {
-        if (okHttpClient == null) {
-            okHttpClient = new OkHttpClient.Builder()
-                    .readTimeout(10000, TimeUnit.MILLISECONDS)
-                    .writeTimeout(10000, TimeUnit.MILLISECONDS)
-                    .connectTimeout(10000, TimeUnit.MILLISECONDS)
-                    .build();
-        }
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("http://www.weather.com.cn/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .client(okHttpClient)
-                    .build();
-        }
+
     }
 
-    public static RetrofitManager getInstance() {
-        if (mInstance == null) {
-            synchronized (RetrofitManager.class) {
-                if (mInstance == null)
-                    mInstance = new RetrofitManager();
-            }
+    private RetrofitManager(Context context) {
+        this(context, baseUrl);
+    }
+
+    /**
+     * 两个参数的构造方法
+     *
+     * @param context
+     * @param url     自定义的baseUrl
+     */
+    private RetrofitManager(Context context, String url) {
+        if (TextUtils.isEmpty(url)) {
+            url = baseUrl;
         }
-        return mInstance;
+        if (httpCacheDirectory == null) {
+            httpCacheDirectory = new File(context.getCacheDir(), "tamic_cache");
+        }
+        try {
+            if (cache == null) {
+                cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
+            }
+        } catch (Exception e) {
+            Log.e("OKHttp", "Could not create http cache", e);
+        }
+
+        Map<String, String> headers = null;
+        okHttpClient = new OkHttpClient.Builder()
+                .addNetworkInterceptor(
+                        new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .cache(cache)
+                .addInterceptor(new BaseInterceptor(headers))
+                .addInterceptor(new CaheInterceptor(context))
+                .addNetworkInterceptor(new CaheInterceptor(context))
+                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+                .connectionPool(new ConnectionPool(4, 10 * 1000, TimeUnit.MILLISECONDS))
+                // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里4个，和每个保持时间为10s
+                .build();
+        retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(url)
+                .build();
+    }
+
+    private static class SingletonHolder {
+        private static RetrofitManager INSTANCE = new RetrofitManager(
+                mContext);
+    }
+
+    /**
+     * 单参,默认的baseUrl
+     *
+     * @param context
+     * @return
+     */
+    public static RetrofitManager getInstance(Context context) {
+        if (context != null) {
+            mContext = context;
+        }
+        return SingletonHolder.INSTANCE;
+    }
+
+    /**
+     * @param context
+     * @param url     当baseUrl需要自定义时,手动传入即可
+     * @return
+     */
+    public static RetrofitManager getInstance(Context context, String url) {
+        if (context != null) {
+            mContext = context;
+        }
+
+        return new RetrofitManager(context, url);
     }
 
     /**

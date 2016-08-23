@@ -1,7 +1,7 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.presenter.impl;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.BaseNetCallback;
-import com.example.huangwenjian.retrofit_rxjava_mvp.bean.WeatherBean;
+import com.example.huangwenjian.retrofit_rxjava_mvp.model.bean.WeatherBean;
 import com.example.huangwenjian.retrofit_rxjava_mvp.model.impl.WeatherModelImpl;
 import com.example.huangwenjian.retrofit_rxjava_mvp.model.interfaces.IWeatherModel;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.interfaces.IWeatherPresenter;

@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.R;
-import com.example.huangwenjian.retrofit_rxjava_mvp.bean.WeatherBean;
+import com.example.huangwenjian.retrofit_rxjava_mvp.model.bean.WeatherBean;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.impl.WeatherPresenterImpl;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.interfaces.IWeatherPresenter;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.interfaces.IWeatherView;

@@ -1,4 +1,4 @@
-package com.example.huangwenjian.retrofit_rxjava_mvp.bean;
+package com.example.huangwenjian.retrofit_rxjava_mvp.model.bean;
 
 /**
  * 作者: huangwenjian
