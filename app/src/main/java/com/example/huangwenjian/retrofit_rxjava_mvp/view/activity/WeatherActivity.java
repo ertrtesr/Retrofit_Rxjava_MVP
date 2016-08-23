@@ -44,8 +44,19 @@ public class WeatherActivity extends Activity implements IWeatherView<WeatherBea
         mPresenter.getWeather();
     }
 
+
     @Override
     public void refreshUI(WeatherBean weatherBean) {
         mTv_weather.setText(weatherBean.weatherinfo.city);
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
     }
 }
