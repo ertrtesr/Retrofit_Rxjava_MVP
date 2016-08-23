@@ -10,6 +10,7 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.api.APIWrapper;
 import com.example.huangwenjian.retrofit_rxjava_mvp.model.bean.WeatherBean;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.impl.WeatherPresenterImpl;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.interfaces.IWeatherPresenter;
+import com.example.huangwenjian.retrofit_rxjava_mvp.utils.UIUtils;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.interfaces.IWeatherView;
 
 import butterknife.BindView;
@@ -36,6 +37,7 @@ public class WeatherActivity extends Activity implements IWeatherView<WeatherBea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        UIUtils.mActivity = this;
         ButterKnife.bind(this);
         mPresenter = new WeatherPresenterImpl(this);
     }

@@ -1,4 +1,5 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -8,12 +9,15 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * BaseInterceptor
- * Created by LIUYONGKUI726 on 2016-06-30.
- * {@link # https://github.com/NeglectedByBoss/RetrofitClient}
+ * 作者: huangwenjian
+ * -
+ * 描述: 基础拦截器,在RetrofitManager中添加,用于设置公用的请求头
+ * -
+ * 日期: 16/8/22
  */
-public class BaseInterceptor implements Interceptor{
+public class BaseInterceptor implements Interceptor {
     private Map<String, String> headers;
+
     public BaseInterceptor(Map<String, String> headers) {
         this.headers = headers;
     }

@@ -16,6 +16,12 @@ import rx.schedulers.Schedulers;
 public class APIWrapper {
     private static Subscription msub;
 
+    /**
+     * 访问网络并进行数据转换的操作
+     *
+     * @param observable service访问接口得到的observable对象
+     * @param subscriber 订阅者
+     */
     public static void doApi(Observable observable, Subscriber subscriber) {
         msub = observable
                 .subscribeOn(Schedulers.io())                   //这连续几个方法都是RxJava里面的
@@ -24,6 +30,9 @@ public class APIWrapper {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 该方法用于取消订阅
+     */
     public static void cancel() {
         if (!msub.isUnsubscribed()) {
             msub.unsubscribe();

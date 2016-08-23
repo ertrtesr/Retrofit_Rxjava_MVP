@@ -15,8 +15,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * caheInterceptor
- * Created by Tamic on 2016-08-09.
+ * 作者: huangwenjian
+ * -
+ * 描述: 缓存拦截器
+ * -
+ * 日期: 16/8/22
  */
 public class CaheInterceptor implements Interceptor {
 
@@ -34,20 +37,23 @@ public class CaheInterceptor implements Interceptor {
             // read from cache for 60 s
             int maxAge = 60;
             String cacheControl = request.cacheControl().toString();
-            Log.e("Tamic", "60s load cahe" + cacheControl);
+            Log.e("huangwenjian", "60s load cahe" + cacheControl);
             return response.newBuilder()
                     .removeHeader("Pragma")
                     .removeHeader("Cache-Control")
                     .header("Cache-Control", "public, max-age=" + maxAge)
                     .build();
         } else {
+            if (!(context instanceof Activity)) {
+                return null;
+            }
             ((Activity) context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(context, "当前无网络! 为你智能加载缓存", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "当前无网络! 为您智能加载缓存", Toast.LENGTH_SHORT).show();
                 }
             });
-            Log.e("Tamic", " no network load cahe");
+            Log.w("huangwenjian", " no network load cahe");
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build();

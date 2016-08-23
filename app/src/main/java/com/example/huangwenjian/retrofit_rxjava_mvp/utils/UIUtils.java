@@ -1,5 +1,6 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
@@ -14,11 +15,22 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.base.BaseApplication;
  * 日期: 16/8/22
  */
 public class UIUtils {
+    public static Activity mActivity;
+
     /**
      * 得到上下文
      */
     public static Context getContext() {
         return BaseApplication.getContext();
+    }
+
+    /**
+     * 得到activity
+     *
+     * @return
+     */
+    public static Activity getActivity() {
+        return mActivity;
     }
 
     /**
