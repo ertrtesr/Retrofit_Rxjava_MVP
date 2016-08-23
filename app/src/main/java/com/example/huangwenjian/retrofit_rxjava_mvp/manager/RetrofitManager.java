@@ -61,7 +61,7 @@ public class RetrofitManager {
         }
         try {
             if (cache == null) {
-                cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
+                cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);        //创建10MB的缓存空间
             }
         } catch (Exception e) {
             Log.e("OKHttp", "Could not create http cache", e);
@@ -89,8 +89,7 @@ public class RetrofitManager {
     }
 
     private static class SingletonHolder {
-        private static RetrofitManager INSTANCE = new RetrofitManager(
-                mContext);
+        private static RetrofitManager INSTANCE = new RetrofitManager(mContext);
     }
 
     /**
@@ -115,7 +114,6 @@ public class RetrofitManager {
         if (context != null) {
             mContext = context;
         }
-
         return new RetrofitManager(context, url);
     }
 
