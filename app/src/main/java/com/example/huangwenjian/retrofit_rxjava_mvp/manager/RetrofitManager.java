@@ -29,21 +29,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitManager {
     private static Context mContext;
-    private static RetrofitManager mInstance;
-    private Retrofit retrofit;
-    private static final int DEFAULT_TIMEOUT = 10000;
-    private APIService apiService;
-    private static OkHttpClient okHttpClient;
-    private static String baseUrl = APIService.BASE_URL;
-    private Cache cache = null;
-    private File httpCacheDirectory;
+    private Retrofit mRetrofit;
+    private static final int DEFAULT_TIMEOUT = 10 * 1000;
+    private static OkHttpClient mOkHttpClient;
+    private static String mBaseUrl = APIService.BASE_URL;
+    private Cache mCache = null;
+    private File mHttpCacheDirectory;
 
     private RetrofitManager() {
 
     }
 
     private RetrofitManager(Context context) {
-        this(context, baseUrl);
+        this(context, mBaseUrl);
     }
 
     /**
@@ -54,24 +52,24 @@ public class RetrofitManager {
      */
     private RetrofitManager(Context context, String url) {
         if (TextUtils.isEmpty(url)) {
-            url = baseUrl;
+            url = mBaseUrl;
         }
-        if (httpCacheDirectory == null) {
-            httpCacheDirectory = new File(context.getCacheDir(), "retrofit_cache");
+        if (mHttpCacheDirectory == null) {
+            mHttpCacheDirectory = new File(context.getCacheDir(), "retrofit_cache");
         }
         try {
-            if (cache == null) {
-                cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);        //创建10MB的缓存空间
+            if (mCache == null) {
+                mCache = new Cache(mHttpCacheDirectory, 10 * 1024 * 1024);        //创建10MB的缓存空间
             }
         } catch (Exception e) {
             Log.e("OkHttp", "Could not create http cache", e);
         }
 
         Map<String, String> headers = null;
-        okHttpClient = new OkHttpClient.Builder()
+        mOkHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(
                         new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .cache(cache)
+                .cache(mCache)
                 .addInterceptor(new BaseInterceptor(headers))
                 .addInterceptor(new CaheInterceptor(context))
                 .addNetworkInterceptor(new CaheInterceptor(context))
@@ -79,8 +77,8 @@ public class RetrofitManager {
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectionPool(new ConnectionPool(4, 10 * 1000, TimeUnit.MILLISECONDS))    // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里4个，和每个保持时间为10s
                 .build();
-        retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
+        mRetrofit = new Retrofit.Builder()
+                .client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(url)
@@ -124,6 +122,6 @@ public class RetrofitManager {
      * @return
      */
     public <T> T createService(Class<T> clazz) {
-        return retrofit.create(clazz);
+        return mRetrofit.create(clazz);
     }
 }
