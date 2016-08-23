@@ -20,7 +20,7 @@ public class WeatherModelImpl implements IWeatherModel {
     private BaseNetCallback<WeatherBean> mCallback;
 
     public WeatherModelImpl(BaseNetCallback callback) {
-        mCallback = callback;
+        mCallback = callback;       //callback就是WeatherPresenterImpl的实例
     }
 
     /**

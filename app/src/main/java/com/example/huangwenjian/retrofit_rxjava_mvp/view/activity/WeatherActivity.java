@@ -44,7 +44,7 @@ public class WeatherActivity extends Activity implements IWeatherView<WeatherBea
 
     @OnClick(R.id.btn_weather)
     public void click() {
-        mPresenter.getWeather();
+        mPresenter.getWeather();        //跳转到WeatherPresenterImpl类中的getWeather()方法
     }
 
 

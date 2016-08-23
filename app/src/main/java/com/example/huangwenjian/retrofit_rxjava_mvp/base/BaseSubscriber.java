@@ -28,7 +28,7 @@ public class BaseSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
-        mCallback.onResponse(t);
+        mCallback.onResponse(t);        //跳转到WeatherPresenterImpl类中的onResponse()方法
     }
 
     @Override
