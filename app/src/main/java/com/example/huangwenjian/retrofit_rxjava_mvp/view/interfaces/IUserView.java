@@ -5,9 +5,9 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.base.interfaces.IBaseView;
 /**
  * 作者: huangwenjian
  * -
- * 描述: View层接口继承基类接口,如果
+ * 描述:
  * -
- * 日期: 16/8/22
+ * 日期: 16/8/23
  */
-public interface IWeatherView<T> extends IBaseView<T> {
+public interface IUserView<T> extends IBaseView<T> {
 }

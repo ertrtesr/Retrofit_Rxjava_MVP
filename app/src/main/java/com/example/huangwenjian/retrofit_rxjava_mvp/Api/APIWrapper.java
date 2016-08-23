@@ -21,6 +21,7 @@ public class APIWrapper {
     private static Subscription subscription;
 
     static {
+        //初始化service,只要baseUrl不变则只需要初始化一次就行
         apiService = RetrofitManager.getInstance(UIUtils.getActivity()).createService(APIService.class);
     }
 

@@ -5,29 +5,20 @@
               android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_get_weather"
+        android:id="@+id/btn_get_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="获取天气信息"
+        android:text="获取用户信息"
         android:textSize="20sp"/>
 
     <TextView
-        android:id="@+id/tv_show_weather"
+        android:id="@+id/tv_show_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:text="此处进行数据展示"
         android:textSize="20sp"/>
-
-    <Button
-        android:id="@+id/btn_enter_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="50dp"
-        android:text="进入UserActivity"
-        android:textSize="16sp"/>
 
 </LinearLayout>

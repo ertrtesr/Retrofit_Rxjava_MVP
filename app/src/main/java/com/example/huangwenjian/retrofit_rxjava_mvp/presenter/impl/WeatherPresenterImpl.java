@@ -32,7 +32,6 @@ public class WeatherPresenterImpl extends BaseNetCallback<WeatherBean> implement
         mModel.getWeather();        //由model层发起网络请求
     }
 
-
     @Override
     public void onResponse(WeatherBean weatherBean) {
         mView.refreshUI(weatherBean);

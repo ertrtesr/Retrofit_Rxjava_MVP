@@ -77,8 +77,7 @@ public class RetrofitManager {
                 .addNetworkInterceptor(new CaheInterceptor(context))
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .connectionPool(new ConnectionPool(4, 10 * 1000, TimeUnit.MILLISECONDS))
-                // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里4个，和每个保持时间为10s
+                .connectionPool(new ConnectionPool(4, 10 * 1000, TimeUnit.MILLISECONDS))    // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里4个，和每个保持时间为10s
                 .build();
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
