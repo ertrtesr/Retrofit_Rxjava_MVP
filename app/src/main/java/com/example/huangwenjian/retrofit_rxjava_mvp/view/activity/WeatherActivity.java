@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.R;
+import com.example.huangwenjian.retrofit_rxjava_mvp.api.APIWrapper;
 import com.example.huangwenjian.retrofit_rxjava_mvp.model.bean.WeatherBean;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.impl.WeatherPresenterImpl;
 import com.example.huangwenjian.retrofit_rxjava_mvp.presenter.interfaces.IWeatherPresenter;
@@ -47,7 +48,11 @@ public class WeatherActivity extends Activity implements IWeatherView<WeatherBea
 
     @Override
     public void refreshUI(WeatherBean weatherBean) {
-        mTv_weather.setText(weatherBean.weatherinfo.city);
+        WeatherBean.WeatherinfoBean weatherinfo = weatherBean.weatherinfo;
+        String city = weatherinfo.city;
+        String weather = weatherinfo.weather;
+
+        mTv_weather.setText(city + " " + weather);
     }
 
     @Override
@@ -58,5 +63,11 @@ public class WeatherActivity extends Activity implements IWeatherView<WeatherBea
     @Override
     public void showEmpty() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        APIWrapper.cancel();
     }
 }

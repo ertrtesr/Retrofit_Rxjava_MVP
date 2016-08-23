@@ -16,8 +16,9 @@
         android:id="@+id/tv_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:text="11"
+        android:text="此处进行数据展示"
         android:textSize="20sp"/>
 
 </LinearLayout>

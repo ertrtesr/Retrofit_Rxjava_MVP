@@ -9,7 +9,7 @@ import rx.schedulers.Schedulers;
 /**
  * 作者: huangwenjian
  * -
- * 描述:
+ * 描述: 访问网络的工具类
  * -
  * 日期: 16/8/23
  */
