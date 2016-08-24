@@ -3,7 +3,7 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.utils;
 import android.app.Dialog;
 import android.content.Context;
 
-import com.example.huangwenjian.retrofit_rxjava_mvp.dialog.CustomDialog;
+//import com.example.huangwenjian.retrofit_rxjava_mvp.dialog.CustomDialog;
 import com.example.huangwenjian.retrofit_rxjava_mvp.dialog.LoadingDialog;
 
 
@@ -15,8 +15,8 @@ public class DialogUtils {
     public static Dialog mDialog;
 
     public static void showDialog(Context context, int layoutId) {
-        mDialog = new CustomDialog(context, layoutId);
-        mDialog.show();
+//        mDialog = new CustomDialog(context, layoutId);
+//        mDialog.show();
     }
 
     public static void hideDialog() {
