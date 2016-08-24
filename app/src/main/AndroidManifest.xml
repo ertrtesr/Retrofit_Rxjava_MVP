@@ -21,5 +21,6 @@
         <activity android:name=".view.activity.WeatherActivity"/>
         <activity android:name=".view.activity.UserActivity"/>
         <activity android:name=".view.activity.XListviewActivity"/>
+        <activity android:name=".view.activity.DialogActivity"/>
     </application>
 </manifest>

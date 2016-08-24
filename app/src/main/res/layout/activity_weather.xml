@@ -30,4 +30,11 @@
         android:text="进入UserActivity"
         android:textSize="16sp"/>
 
+    <Button
+        android:id="@+id/btn_enter_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进入DialogActivity"
+        android:textSize="16sp"/>
+
 </LinearLayout>

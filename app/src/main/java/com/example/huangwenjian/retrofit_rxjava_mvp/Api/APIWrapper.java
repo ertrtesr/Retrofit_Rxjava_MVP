@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
  * 日期: 16/8/23
  */
 public class APIWrapper {
-    public static  APIService apiService;
+    public static APIService apiService;
     private static Subscription subscription;
 
     static {
@@ -43,9 +43,11 @@ public class APIWrapper {
      * 该方法用于取消订阅
      */
     public static void cancel() {
-        if (!subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+        if (subscription != null) {
+            if (!subscription.isUnsubscribed()) {
+                subscription.unsubscribe();
+            }
+            subscription = null;
         }
-        subscription = null;
     }
 }

@@ -62,6 +62,12 @@ public class WeatherActivity extends Activity implements IWeatherView<WeatherBea
         startActivity(intent);
     }
 
+    @OnClick(R.id.btn_enter_dialog)
+    public void enterDialog() {
+        Intent intent = new Intent(this, DialogActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void refreshUI(WeatherBean weatherBean) {
         WeatherBean.WeatherinfoBean weatherinfo = weatherBean.weatherinfo;

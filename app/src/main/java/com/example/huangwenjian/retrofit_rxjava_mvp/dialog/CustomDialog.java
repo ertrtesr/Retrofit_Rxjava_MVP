@@ -24,8 +24,10 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
     }
 
     private void initListener() {
-        mTv_confirm.setOnClickListener(this);
-        mTv_cancel.setOnClickListener(this);
+        if (mTv_confirm != null && mTv_cancel != null) {
+            mTv_confirm.setOnClickListener(this);
+            mTv_cancel.setOnClickListener(this);
+        }
     }
 
     private void initView() {
