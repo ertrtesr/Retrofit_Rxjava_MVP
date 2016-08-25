@@ -93,7 +93,7 @@ public class PopupWindowHelper {
         /**
          * 在某一控件下方弹窗
          *
-         * @param anchor
+         * @param anchor 指定的控件
          */
         public void showAbove(View anchor) {
             showAbove(anchor, 0, 0);
@@ -102,7 +102,7 @@ public class PopupWindowHelper {
         /**
          * 在某一个控件上方弹窗
          *
-         * @param anchor
+         * @param anchor 指定的控件
          * @param xoff
          * @param yoff
          */
@@ -115,6 +115,11 @@ public class PopupWindowHelper {
             }
         }
 
+        /**
+         * 从指定view的底部弹窗
+         *
+         * @param anchor 指定的view
+         */
         public void showFromBottom(View anchor) {
             if (mPopupWindow != null) {
                 mPopupWindow.setAnimationStyle(R.style.AnimationFromButtom);
@@ -122,6 +127,11 @@ public class PopupWindowHelper {
             }
         }
 
+        /**
+         * 从指定的view的顶部弹窗
+         *
+         * @param anchor 指定的view
+         */
         public void showFromTop(View anchor) {
             if (mPopupWindow != null) {
                 mPopupWindow.setAnimationStyle(R.style.AnimationFromTop);
@@ -129,6 +139,11 @@ public class PopupWindowHelper {
             }
         }
 
+        /**
+         * 在指定的view的中间弹窗
+         *
+         * @param anchor 指定的view
+         */
         public void showInCenter(View anchor) {
             if (mPopupWindow != null) {
                 mPopupWindow.showAtLocation(anchor, Gravity.CENTER, 0, 0);
