@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.BaseApplication;
 
@@ -16,6 +18,7 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.base.BaseApplication;
  */
 public class UIUtils {
     public static Activity mActivity;
+    private static LayoutInflater mInflater;
 
     /**
      * 得到上下文
@@ -100,7 +103,6 @@ public class UIUtils {
         } else {// 如果当前线程不是主线程
             getMainThreadHandler().post(task);
         }
-
     }
 
     /**
@@ -137,4 +139,9 @@ public class UIUtils {
         return dip;
     }
 
+    public static View inflate(int resId) {
+        mInflater = LayoutInflater.from(getContext());
+        View view = mInflater.inflate(resId, null);
+        return view;
+    }
 }

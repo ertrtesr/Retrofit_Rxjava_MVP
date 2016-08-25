@@ -10,29 +10,24 @@ import com.example.huangwenjian.retrofit_rxjava_mvp.dialog.LoadingDialog;
 /**
  * Created by huangwenjian on 2016/8/17.
  */
-public class DialogUtils {
+public class LoadingDialogUtils {
 
     public static Dialog mDialog;
-
-    public static void showDialog(Context context, int layoutId) {
-//        mDialog = new CustomDialog(context, layoutId);
-//        mDialog.show();
-    }
-
-    public static void hideDialog() {
-        if (mDialog != null) {
-            mDialog.dismiss();
-            mDialog = null;
-        }
-    }
 
     /**
      * 展示loading对话框
      *
      * @param context
      */
-    public static void showLoadingDialog(Context context) {
+    public static void show(Context context) {
         mDialog = new LoadingDialog(context);
         mDialog.show();
+    }
+
+    public static void hide() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
     }
 }

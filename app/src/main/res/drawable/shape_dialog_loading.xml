@@ -6,28 +6,21 @@
         android:bottomLeftRadius="10dp"
         android:bottomRightRadius="10dp"
         android:topLeftRadius="10dp"
-        android:topRightRadius="10dp"/><!-- 设置圆角半径 -->
+        android:topRightRadius="10dp" /><!-- 设置圆角半径 -->
 
-    <!--&lt;!&ndash; 渐变 &ndash;&gt;-->
-    <!--<gradient-->
-    <!--android:angle="45"-->
-    <!--android:centerColor="@android:color/black"-->
-    <!--android:centerX="0"-->
-    <!--android:centerY="0"-->
-    <!--android:endColor="@android:color/black"-->
-    <!--android:gradientRadius="90"-->
-    <!--android:startColor="@android:color/white"-->
-    <!--android:type="radial"-->
-    <!--android:useLevel="true"/>-->
+    <!-- 渐变 -->
+    <gradient
+        android:angle="-90"
+        android:endColor="#EDEDED"
+        android:startColor="#ffffff" />
 
     <!-- 大小 -->
     <size
         android:width="100dp"
-        android:height="100dp"/><!-- 宽度和高度 -->
+        android:height="100dp" /><!-- 宽度和高度 -->
 
     <!-- 填充 -->
-    <solid
-        android:color="#333333"/><!-- 填充的颜色 -->
+    <solid android:color="#333333" /><!-- 填充的颜色 -->
 
     <!--&lt;!&ndash; 描边 &ndash;&gt;-->
     <!--<stroke-->

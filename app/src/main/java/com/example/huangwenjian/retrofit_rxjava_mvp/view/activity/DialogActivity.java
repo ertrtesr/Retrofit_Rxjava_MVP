@@ -2,11 +2,12 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.R;
-import com.example.huangwenjian.retrofit_rxjava_mvp.utils.DialogUtils;
+import com.example.huangwenjian.retrofit_rxjava_mvp.utils.LoadingDialogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,10 +39,16 @@ public class DialogActivity extends Activity {
     public void click(View v) {
         switch (v.getId()) {
             case R.id.btn_show_loading:
-                DialogUtils.showLoadingDialog(this);
+                LoadingDialogUtils.show(this);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialogUtils.hide();
+                    }
+                }, 2000);
                 break;
             case R.id.btn_hide_loading:
-                DialogUtils.hideDialog();
+                LoadingDialogUtils.hide();
                 break;
             default:
                 break;

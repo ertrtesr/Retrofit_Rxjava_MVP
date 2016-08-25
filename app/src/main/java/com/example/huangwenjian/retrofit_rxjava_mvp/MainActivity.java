@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.PopupActivity;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.WeatherActivity;
 
 import butterknife.BindView;
@@ -12,8 +13,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends Activity {
-    @BindView(R.id.btn_start)
-    Button mBtn_start;
+    @BindView(R.id.btn_enter_weather)
+    Button mBtn_enter_weather;
+
+    @BindView(R.id.btn_enter_pop)
+    Button mBtn_enter_pop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +26,15 @@ public class MainActivity extends Activity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btn_start)
+    @OnClick(R.id.btn_enter_weather)
     public void start() {
         Intent intent = new Intent(this, WeatherActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_enter_pop)
+    void enterPop() {
+        Intent intent = new Intent(this, PopupActivity.class);
         startActivity(intent);
     }
 }
