@@ -134,23 +134,5 @@ public class PopupWindowHelper {
                 mPopupWindow.showAtLocation(anchor, Gravity.CENTER, 0, 0);
             }
         }
-
-        private int getMeasuredHeight(View view) {
-            int w = View.MeasureSpec.makeMeasureSpec(0,
-                    View.MeasureSpec.UNSPECIFIED);
-            int h = View.MeasureSpec.makeMeasureSpec(0,
-                    View.MeasureSpec.UNSPECIFIED);
-            view.measure(w, h);
-            return view.getMeasuredHeight();
-        }
-
-        private int getMeasuredWidth(View view) {
-            int w = View.MeasureSpec.makeMeasureSpec(0,
-                    View.MeasureSpec.UNSPECIFIED);
-            int h = View.MeasureSpec.makeMeasureSpec(0,
-                    View.MeasureSpec.UNSPECIFIED);
-            view.measure(w, h);
-            return view.getMeasuredWidth();
-        }
     }
 }

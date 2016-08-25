@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.ExpandbleTextActivity;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.PopupActivity;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.WeatherActivity;
 
@@ -35,6 +36,12 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btn_enter_pop)
     void enterPop() {
         Intent intent = new Intent(this, PopupActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_enter_expandtext)
+    void enterExpandText() {
+        Intent intent = new Intent(this, ExpandbleTextActivity.class);
         startActivity(intent);
     }
 }
