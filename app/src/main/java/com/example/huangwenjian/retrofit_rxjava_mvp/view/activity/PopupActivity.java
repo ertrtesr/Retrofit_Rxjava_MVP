@@ -53,22 +53,22 @@ public class PopupActivity extends Activity {
 
     @OnClick(R.id.button1)
     void showAbove() {
-        mHelper.init(200, 150).showAbove(mButton1);
+        mHelper.init(200, 150).showAbove(mButton1);     //init()方法必须先执行
     }
 
     @OnClick(R.id.button2)
     void showBelow() {
-        mHelper.init(200, ViewGroup.LayoutParams.WRAP_CONTENT).showBelow(mButton2);
+        mHelper.init(200, ViewGroup.LayoutParams.WRAP_CONTENT).showBelow(mButton2, 20, 0);
     }
 
     @OnClick(R.id.button3)
-    void showFromBottom() {
-        mHelper.init(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).showFromBottom(mRootView);
+    void showFromTop() {
+        mHelper.init(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).showFromTop(mRootView);
     }
 
     @OnClick(R.id.button4)
-    void showFromTop() {
-        mHelper.init(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).showFromTop(mRootView);
+    void showFromBottom() {
+        mHelper.init(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).showFromBottom(mRootView);
     }
 
     @OnClick(R.id.button5)

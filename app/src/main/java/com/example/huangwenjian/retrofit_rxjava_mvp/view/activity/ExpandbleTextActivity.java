@@ -20,7 +20,7 @@ import butterknife.OnClick;
 /**
  * 作者: huangwenjian
  * <p/>
- * 描述:
+ * 描述: 可点击展开的textview
  * <p/>
  * 日期: on 16/8/25
  */
@@ -144,7 +144,7 @@ public class ExpandbleTextActivity extends Activity {
         TextView tempTextView = new TextView(UIUtils.getContext());
         tempTextView.setLines(7);
         tempTextView.setText(text);
-        tempTextView.setTextSize(20);
+        tempTextView.setTextSize(20);       //此处的textsize要跟布局中的保持一致,否则不能正确显示行数
 
         tempTextView.measure(0, 0);
         int measuredHeight = tempTextView.getMeasuredHeight();

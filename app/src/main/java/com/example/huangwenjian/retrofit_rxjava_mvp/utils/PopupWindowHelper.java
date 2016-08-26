@@ -46,16 +46,15 @@ public class PopupWindowHelper {
         return mInnerHelper;
     }
 
-    private int getStatusBarHeight() {
-        return Math.round(25 * Resources.getSystem().getDisplayMetrics().density);
-    }
-
     /**
-     * touch outside dismiss the popupwindow, default is ture
+     * 点击popupwindow以外的地方消失, 默认为true
      *
      * @param isCancelable
      */
     public void setCancelable(boolean isCancelable) {
+        if (mPopupWindow == null) {
+            return;
+        }
         if (isCancelable) {
             mPopupWindow.setOutsideTouchable(true);
             mPopupWindow.setFocusable(true);
@@ -65,11 +64,13 @@ public class PopupWindowHelper {
         }
     }
 
+    /**
+     * 内部类
+     */
     public class InnerPopupWindowHelper {
 
         public void showBelow(View anchor) {
-            if (mPopupWindow != null)
-                mPopupWindow.showAsDropDown(anchor);
+            showBelow(anchor, 0, 0);
         }
 
         public void showBelow(View anchor, int xoff, int yoff) {
@@ -130,9 +131,11 @@ public class PopupWindowHelper {
         }
 
         public void showInCenter(View anchor) {
-            if (mPopupWindow != null) {
-                mPopupWindow.showAtLocation(anchor, Gravity.CENTER, 0, 0);
-            }
+            showAtLocation(anchor, Gravity.CENTER, 0, 0);
+        }
+
+        private int getStatusBarHeight() {
+            return Math.round(25 * Resources.getSystem().getDisplayMetrics().density);
         }
     }
 }
