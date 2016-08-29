@@ -71,7 +71,7 @@ public class DownloadInterceptor implements Interceptor {
                 public long read(Buffer sink, long byteCount) throws IOException {
                     long bytesRead = super.read(sink, byteCount);       //已经读取的字节数 , super.read()即source.read()
                     // read() returns the number of bytes read, or -1 if this source is exhausted.
-                    totalBytesRead += bytesRead != -1 ? bytesRead : 0;      //读取到的字节数总和为之前读取的和本次读取的累加
+                    totalBytesRead += (bytesRead != -1 ? bytesRead : 0);      //读取到的字节数总和为之前读取的和本次读取的累加
 
                     if (null != progressListener) {
                         progressListener.onProgress(totalBytesRead, responseBody.contentLength(), bytesRead == -1);

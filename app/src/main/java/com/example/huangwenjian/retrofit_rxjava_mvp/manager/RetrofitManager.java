@@ -7,6 +7,8 @@ import android.util.Log;
 import com.example.huangwenjian.retrofit_rxjava_mvp.api.APIService;
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.BaseInterceptor;
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.CaheInterceptor;
+import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.DownloadInterceptor;
+import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.DownloadInterceptor.DownloadProgressListener;
 
 import java.io.File;
 import java.util.Map;
@@ -48,11 +50,47 @@ public class RetrofitManager {
      * 两个参数的构造方法
      *
      * @param context
-     * @param url     自定义的baseUrl
+     * @param baseUrl 自定义的baseUrl
      */
-    private RetrofitManager(Context context, String url) {
-        if (TextUtils.isEmpty(url)) {
-            url = mBaseUrl;
+    private RetrofitManager(Context context, String baseUrl) {
+        //        if (TextUtils.isEmpty(baseUrl)) {
+        //            baseUrl = mBaseUrl;
+        //        }
+        //        if (mHttpCacheDirectory == null) {
+        //            mHttpCacheDirectory = new File(context.getCacheDir(), "retrofit_cache");
+        //        }
+        //        try {
+        //            if (mCache == null) {
+        //                mCache = new Cache(mHttpCacheDirectory, 10 * 1024 * 1024);        //创建10MB的缓存空间
+        //            }
+        //        } catch (Exception e) {
+        //            Log.e("OkHttp", "Could not create http cache", e);
+        //        }
+        //
+        //        Map<String, String> headers = null;
+        //        mOkHttpClient = new OkHttpClient.Builder()
+        //                .addNetworkInterceptor(
+        //                        new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        //                .cache(mCache)
+        //                .addInterceptor(new BaseInterceptor(headers))
+        //                .addInterceptor(new CaheInterceptor(context))
+        //                .addNetworkInterceptor(new CaheInterceptor(context))
+        //                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+        //                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+        //                .connectionPool(new ConnectionPool(4, 10 * 1000, TimeUnit.MILLISECONDS))    // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里4个，和每个保持时间为10s
+        //                .build();
+        //        mRetrofit = new Retrofit.Builder()
+        //                .client(mOkHttpClient)
+        //                .addConverterFactory(GsonConverterFactory.create())
+        //                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        //                .baseUrl(baseUrl)
+        //                .build();
+        this(context, baseUrl, null);
+    }
+
+    private RetrofitManager(Context context, String baseUrl, DownloadProgressListener listener) {
+        if (TextUtils.isEmpty(baseUrl)) {
+            baseUrl = mBaseUrl;
         }
         if (mHttpCacheDirectory == null) {
             mHttpCacheDirectory = new File(context.getCacheDir(), "retrofit_cache");
@@ -70,6 +108,7 @@ public class RetrofitManager {
                 .addNetworkInterceptor(
                         new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .cache(mCache)
+                .addInterceptor(new DownloadInterceptor(listener))
                 .addInterceptor(new BaseInterceptor(headers))
                 .addInterceptor(new CaheInterceptor(context))
                 .addNetworkInterceptor(new CaheInterceptor(context))
@@ -81,7 +120,7 @@ public class RetrofitManager {
                 .client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(url)
+                .baseUrl(baseUrl)
                 .build();
     }
 
@@ -104,14 +143,26 @@ public class RetrofitManager {
 
     /**
      * @param context
-     * @param url     当baseUrl需要自定义时,手动传入即可
+     * @param baseUrl 当baseUrl需要自定义时,手动传入即可
      * @return
      */
-    public static RetrofitManager getInstance(Context context, String url) {
+    public static RetrofitManager getInstance(Context context, String baseUrl) {
         if (context != null) {
             mContext = context;
         }
-        return new RetrofitManager(context, url);
+        return new RetrofitManager(context, baseUrl);
+    }
+
+    public static RetrofitManager getDownLoadInstance(Context context, DownloadProgressListener listener) {
+        return null;
+    }
+
+    public static RetrofitManager getDownLoadInstance(Context context, String baseUrl, DownloadProgressListener listener) {
+        return null;
+    }
+
+    public static RetrofitManager getUpLoadInstance() {
+        return null;
     }
 
     /**
