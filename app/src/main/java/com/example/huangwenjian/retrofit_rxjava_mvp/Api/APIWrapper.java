@@ -39,6 +39,11 @@ public class APIWrapper {
                 .subscribe(subscriber);
     }
 
+    public static void doDownload(Observable observable,Subscriber subscriber) {
+
+
+    }
+
     /**
      * 该方法用于取消订阅
      */
