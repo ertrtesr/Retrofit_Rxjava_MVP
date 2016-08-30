@@ -7,8 +7,7 @@ import android.util.Log;
 import com.example.huangwenjian.retrofit_rxjava_mvp.api.APIService;
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.BaseInterceptor;
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.CaheInterceptor;
-import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.DownloadInterceptor;
-import com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor.DownloadInterceptor.DownloadProgressListener;
+import com.example.huangwenjian.retrofit_rxjava_mvp.listener.DownloadProgressListener;
 
 import java.io.File;
 import java.util.Map;
@@ -37,6 +36,7 @@ public class RetrofitManager {
     private static String mBaseUrl = APIService.BASE_URL;
     private Cache mCache = null;
     private File mHttpCacheDirectory;
+    private static DownloadProgressListener mDownloadProgressListener;
 
     private RetrofitManager() {
 
@@ -53,42 +53,6 @@ public class RetrofitManager {
      * @param baseUrl 自定义的baseUrl
      */
     private RetrofitManager(Context context, String baseUrl) {
-        //        if (TextUtils.isEmpty(baseUrl)) {
-        //            baseUrl = mBaseUrl;
-        //        }
-        //        if (mHttpCacheDirectory == null) {
-        //            mHttpCacheDirectory = new File(context.getCacheDir(), "retrofit_cache");
-        //        }
-        //        try {
-        //            if (mCache == null) {
-        //                mCache = new Cache(mHttpCacheDirectory, 10 * 1024 * 1024);        //创建10MB的缓存空间
-        //            }
-        //        } catch (Exception e) {
-        //            Log.e("OkHttp", "Could not create http cache", e);
-        //        }
-        //
-        //        Map<String, String> headers = null;
-        //        mOkHttpClient = new OkHttpClient.Builder()
-        //                .addNetworkInterceptor(
-        //                        new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        //                .cache(mCache)
-        //                .addInterceptor(new BaseInterceptor(headers))
-        //                .addInterceptor(new CaheInterceptor(context))
-        //                .addNetworkInterceptor(new CaheInterceptor(context))
-        //                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-        //                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-        //                .connectionPool(new ConnectionPool(4, 10 * 1000, TimeUnit.MILLISECONDS))    // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里4个，和每个保持时间为10s
-        //                .build();
-        //        mRetrofit = new Retrofit.Builder()
-        //                .client(mOkHttpClient)
-        //                .addConverterFactory(GsonConverterFactory.create())
-        //                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        //                .baseUrl(baseUrl)
-        //                .build();
-        this(context, baseUrl, null);
-    }
-
-    private RetrofitManager(Context context, String baseUrl, DownloadProgressListener listener) {
         if (TextUtils.isEmpty(baseUrl)) {
             baseUrl = mBaseUrl;
         }
@@ -108,7 +72,6 @@ public class RetrofitManager {
                 .addNetworkInterceptor(
                         new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .cache(mCache)
-                .addInterceptor(new DownloadInterceptor(listener))
                 .addInterceptor(new BaseInterceptor(headers))
                 .addInterceptor(new CaheInterceptor(context))
                 .addNetworkInterceptor(new CaheInterceptor(context))
@@ -124,8 +87,9 @@ public class RetrofitManager {
                 .build();
     }
 
-    private static class SingletonHolder {
+    private static class Singleton {
         private static RetrofitManager INSTANCE = new RetrofitManager(mContext);
+        private static RetrofitManager DOWNLOAD_INSTANCE = new RetrofitManager(mContext);
     }
 
     /**
@@ -138,7 +102,7 @@ public class RetrofitManager {
         if (context != null) {
             mContext = context;
         }
-        return SingletonHolder.INSTANCE;
+        return Singleton.INSTANCE;
     }
 
     /**
@@ -153,11 +117,14 @@ public class RetrofitManager {
         return new RetrofitManager(context, baseUrl);
     }
 
-    public static RetrofitManager getDownLoadInstance(Context context, DownloadProgressListener listener) {
-        return null;
+    public static RetrofitManager getDownLoadInstance(Context context) {
+        if (context != null) {
+            mContext = context;
+        }
+        return Singleton.DOWNLOAD_INSTANCE;
     }
 
-    public static RetrofitManager getDownLoadInstance(Context context, String baseUrl, DownloadProgressListener listener) {
+    public static RetrofitManager getDownLoadInstance(Context context, String baseUrl) {
         return null;
     }
 

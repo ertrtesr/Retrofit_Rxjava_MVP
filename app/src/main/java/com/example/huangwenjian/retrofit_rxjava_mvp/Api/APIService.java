@@ -3,8 +3,10 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.api;
 import com.example.huangwenjian.retrofit_rxjava_mvp.model.bean.UserBean;
 import com.example.huangwenjian.retrofit_rxjava_mvp.model.bean.WeatherBean;
 
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
 import rx.Observable;
 
 /**
@@ -25,4 +27,8 @@ public interface APIService {
 
     @GET("n8/number/dictionary")
     Observable<UserBean> getUserInfo(@Query("imsi") String name);
+
+    @Streaming
+    @GET("11.jpg")
+    Observable<ResponseBody> download();
 }

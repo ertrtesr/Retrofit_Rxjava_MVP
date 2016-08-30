@@ -12,6 +12,10 @@ import rx.Subscriber;
 public class BaseSubscriber<T> extends Subscriber<T> {
     private BaseNetCallback mCallback;
 
+    public BaseSubscriber() {
+
+    }
+
     public BaseSubscriber(BaseNetCallback callback) {
         mCallback = callback;
     }
