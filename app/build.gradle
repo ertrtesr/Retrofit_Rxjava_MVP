@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 23
@@ -18,6 +19,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.example.huangwenjian.retrofit_rxjava_mvp'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -33,4 +40,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.9'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
+    compile 'org.greenrobot:greendao:3.1.1'
+    compile 'org.greenrobot:greendao-generator:3.1.0'
 }

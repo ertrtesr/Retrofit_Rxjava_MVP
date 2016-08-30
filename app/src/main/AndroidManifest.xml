@@ -28,5 +28,7 @@
         <activity android:name=".view.activity.PopupActivity"/>
         <activity android:name=".view.activity.ExpandbleTextActivity"/>
         <activity android:name=".view.activity.DownloadActivity"/>
+
+        <service android:name=".service.DownloadService"/>
     </application>
 </manifest>
