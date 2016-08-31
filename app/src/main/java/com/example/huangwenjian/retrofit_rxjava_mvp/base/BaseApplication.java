@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.example.huangwenjian.retrofit_rxjava_mvp.gen.UserDao;
+import com.example.huangwenjian.retrofit_rxjava_mvp.manager.DBManager;
+
 /**
  * 作者: huangwenjian
  * -
@@ -18,6 +21,7 @@ public class BaseApplication extends Application {
     private static long mMainTreadId;
     private static Looper mMainLooper;
     private static Handler mHandler;
+    public static UserDao mUserDao;
 
     public static Handler getHandler() {
         return mHandler;
@@ -59,6 +63,15 @@ public class BaseApplication extends Application {
 
         // 定义一个handler
         mHandler = new Handler();
+
+        initDatabaseOperator();
         super.onCreate();
+    }
+
+    /**
+     * 初始化数据库表操作对象
+     */
+    private void initDatabaseOperator() {
+        mUserDao = DBManager.getInstance(null).getDaoSession().getUserDao();
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.DatabaseActivity;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.DownloadActivity;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.ExpandbleTextActivity;
 import com.example.huangwenjian.retrofit_rxjava_mvp.view.activity.PopupActivity;
@@ -26,6 +27,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+
     }
 
     @OnClick(R.id.btn_enter_weather)
@@ -49,6 +52,12 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btn_enter_download)
     void enterDownload() {
         Intent intent = new Intent(this, DownloadActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_enter_database)
+    void enterDatabase(){
+        Intent intent = new Intent(this, DatabaseActivity.class);
         startActivity(intent);
     }
 }
