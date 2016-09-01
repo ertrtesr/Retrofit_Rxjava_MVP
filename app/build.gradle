@@ -20,14 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dexOptions {
-        // Prevent OutOfMemory with MultiDex during the build phase
-        javaMaxHeapSize "4g"
-    }
+//    dexOptions {
+//        // Prevent OutOfMemory with MultiDex during the build phase
+//        javaMaxHeapSize "4g"
+//    }
 
     greendao {
-        schemaVersion 1
-        daoPackage 'com.example.huangwenjian.retrofit_rxjava_mvp.gen'
+        schemaVersion 9
+        daoPackage 'com.example.huangwenjian.retrofit_rxjava_mvp.greendao'
         targetGenDir 'src/main/java'
     }
 }

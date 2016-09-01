@@ -18,12 +18,17 @@ public class Person {
     private String name;
     private String sex;
     private String address;
-    @Generated(hash = 1127805686)
-    public Person(long id, String name, String sex, String address) {
+    private String boy;
+    private String girl;
+    @Generated(hash = 739641504)
+    public Person(long id, String name, String sex, String address, String boy,
+            String girl) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.address = address;
+        this.boy = boy;
+        this.girl = girl;
     }
     @Generated(hash = 1024547259)
     public Person() {
@@ -51,5 +56,17 @@ public class Person {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+    public String getBoy() {
+        return this.boy;
+    }
+    public void setBoy(String boy) {
+        this.boy = boy;
+    }
+    public String getGirl() {
+        return this.girl;
+    }
+    public void setGirl(String girl) {
+        this.girl = girl;
     }
 }

@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
-import com.example.huangwenjian.retrofit_rxjava_mvp.gen.DaoMaster;
-import com.example.huangwenjian.retrofit_rxjava_mvp.gen.DaoOpenHelper;
-import com.example.huangwenjian.retrofit_rxjava_mvp.gen.DaoSession;
+import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.DaoMaster;
+import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.DaoOpenHelper;
+import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.DaoSession;
 import com.example.huangwenjian.retrofit_rxjava_mvp.singleton.SingleTonHolder;
 import com.example.huangwenjian.retrofit_rxjava_mvp.utils.UIUtils;
 
@@ -43,8 +43,8 @@ public class DBManager {
         // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
         // 注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
         // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
-        mHelper = new DaoOpenHelper(mContext, dbName);
-        SQLiteDatabase db = mHelper.getWritableDatabase();      //创建数据库的操作,包括建表的操作
+        mHelper = new DaoOpenHelper(mContext, dbName);          //构造方法中的createAllTables()方法创建数据库表
+        SQLiteDatabase db = mHelper.getWritableDatabase();      //得到数据库
         mDaoMaster = new DaoMaster(db);
         mDaoSession = mDaoMaster.newSession();                  //建立数据库连接对象
     }
@@ -52,7 +52,7 @@ public class DBManager {
     /**
      * 得到一个数据库实例
      *
-     * @param dbName 数据库名,此数据库名应当事先以常量形式先定义好
+     * @param dbName 数据库名,此数据库名应当事先以常量形式先定义好,传null代表使用默认数据库名
      * @return
      */
     public static DBManager getInstance(String dbName) {
