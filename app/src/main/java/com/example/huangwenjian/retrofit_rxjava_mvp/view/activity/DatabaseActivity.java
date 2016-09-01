@@ -7,7 +7,7 @@ import android.widget.Button;
 import com.example.huangwenjian.retrofit_rxjava_mvp.R;
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.BaseApplication;
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_entity.User;
-import com.example.huangwenjian.retrofit_rxjava_mvp.gen.UserDao.Properties;
+import com.example.huangwenjian.retrofit_rxjava_mvp.gen.UserDao;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class DatabaseActivity extends Activity {
 
     @OnClick(R.id.btn_query)
     void query() {
-        List<User> list = BaseApplication.mUserDao.queryBuilder().where(Properties.Id.eq(2)).list();
+        List<User> list = BaseApplication.mUserDao.queryBuilder().where(UserDao.Properties.Id.eq(1)).list();
         for (User user : list) {
             int age = user.getAge();
             System.out.println(age);

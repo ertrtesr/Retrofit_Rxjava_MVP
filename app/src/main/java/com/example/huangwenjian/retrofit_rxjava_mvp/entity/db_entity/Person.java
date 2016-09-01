@@ -9,47 +9,47 @@ import org.greenrobot.greendao.annotation.Generated;
  * <p/>
  * 描述:
  * <p/>
- * 时间: 16/8/30
+ * 时间: 16/8/31
  */
 @Entity
-public class User {
+public class Person {
     @Id(autoincrement = true)
     private long id;
     private String name;
-    private int age;
-
-    @Generated(hash = 446251977)
-    public User(long id, String name, int age) {
+    private String sex;
+    private String address;
+    @Generated(hash = 1127805686)
+    public Person(long id, String name, String sex, String address) {
         this.id = id;
         this.name = name;
-        this.age = age;
+        this.sex = sex;
+        this.address = address;
     }
-
-    @Generated(hash = 586692638)
-    public User() {
+    @Generated(hash = 1024547259)
+    public Person() {
     }
-
     public long getId() {
         return this.id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
-
     public String getName() {
         return this.name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getAge() {
-        return this.age;
+    public String getSex() {
+        return this.sex;
     }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public String getAddress() {
+        return this.address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

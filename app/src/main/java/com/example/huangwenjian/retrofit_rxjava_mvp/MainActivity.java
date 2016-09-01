@@ -27,8 +27,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-
     }
 
     @OnClick(R.id.btn_enter_weather)
@@ -56,7 +54,7 @@ public class MainActivity extends Activity {
     }
 
     @OnClick(R.id.btn_enter_database)
-    void enterDatabase(){
+    void enterDatabase() {
         Intent intent = new Intent(this, DatabaseActivity.class);
         startActivity(intent);
     }
