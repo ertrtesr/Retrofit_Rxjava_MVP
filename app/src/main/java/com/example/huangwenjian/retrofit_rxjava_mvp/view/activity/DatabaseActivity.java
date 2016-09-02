@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.R;
-import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_dao.Dao;
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_entity.User;
 import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.UserDao;
 import com.example.huangwenjian.retrofit_rxjava_mvp.manager.ThreadManager;
@@ -84,10 +83,9 @@ public class DatabaseActivity extends Activity {
 
     @OnClick(R.id.btn_query)
     void query() {
-        List<User> list = Dao.mUserDao.queryBuilder().where(UserDao.Properties.Id.eq(1)).list();
-        for (User user : list) {
-            int age = user.getAge();
-            System.out.println(age);
-        }
+        WhereCondition condition = UserDao.Properties.Id.eq(1);
+        List<User> users = DBUtils.queryUser(condition);
+
+        List<User> users1 = DBUtils.queryUserAll();
     }
 }

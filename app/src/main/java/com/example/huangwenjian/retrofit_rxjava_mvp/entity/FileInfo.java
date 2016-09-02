@@ -8,15 +8,15 @@ import java.io.Serializable;
 public class FileInfo implements Serializable {
     private int id;                           //文件id
     private String fileName;                  //文件名
-    private long totalLength;                 //文件总大小
     private long downloadedLength;            //已经下载的长度
+    private long totalLength;                 //文件总大小
     private int type;                         //文件类型
     private String savePath;                  //文件存储位置
 
     public FileInfo() {
     }
 
-       public String getFileName() {
+    public String getFileName() {
         return fileName;
     }
 
@@ -62,5 +62,17 @@ public class FileInfo implements Serializable {
 
     public void setSavePath(String savePath) {
         this.savePath = savePath;
+    }
+
+    @Override
+    public String toString() {
+        return "FileInfo{" +
+                "id=" + id +
+                ", fileName='" + fileName + '\'' +
+                ", totalLength=" + totalLength +
+                ", downloadedLength=" + downloadedLength +
+                ", type=" + type +
+                ", savePath='" + savePath + '\'' +
+                '}';
     }
 }

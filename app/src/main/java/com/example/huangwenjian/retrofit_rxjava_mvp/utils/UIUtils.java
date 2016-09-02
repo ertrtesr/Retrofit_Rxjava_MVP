@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -143,5 +144,9 @@ public class UIUtils {
         mInflater = LayoutInflater.from(getContext());
         View view = mInflater.inflate(resId, null);
         return view;
+    }
+
+    public static boolean isMainThread() {
+        return Process.myTid() == getMainThreadid();
     }
 }

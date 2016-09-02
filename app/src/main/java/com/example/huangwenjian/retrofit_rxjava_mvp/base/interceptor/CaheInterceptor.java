@@ -1,11 +1,10 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.utils.NetworkUtil;
+import com.example.huangwenjian.retrofit_rxjava_mvp.utils.ToastUtils;
 
 import java.io.IOException;
 
@@ -44,15 +43,7 @@ public class CaheInterceptor implements Interceptor {
                     .header("Cache-Control", "public, max-age=" + maxAge)
                     .build();
         } else {
-            if (!(context instanceof Activity)) {
-                return null;
-            }
-            ((Activity) context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, "当前无网络! 为您智能加载缓存", Toast.LENGTH_SHORT).show();
-                }
-            });
+            ToastUtils.showToastSafe("当前无网络! 为您智能加载缓存");
             Log.w("huangwenjian", " no network load cahe");
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)

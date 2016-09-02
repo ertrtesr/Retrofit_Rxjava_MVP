@@ -1,5 +1,7 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.utils;
 
+import android.text.TextUtils;
+
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_dao.Dao;
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_entity.User;
 
@@ -9,9 +11,9 @@ import java.util.List;
 
 /**
  * 作者: huangwenjian
- * <p>
- * 描述:
- * <p>
+ * <p/>
+ * 描述: 数据库工具类,应根据不同的表建立对应的CRUD方法
+ * <p/>
  * 时间: 16/9/1
  */
 public class DBUtils {
@@ -25,12 +27,22 @@ public class DBUtils {
     }
 
     /**
-     * @param cond
-     * @param condMore
-     * @return
+     * @param cond     查询条件
+     * @param condMore 更多查询条件
+     * @return 数据集合
      */
     public static List<User> queryUser(WhereCondition cond, WhereCondition... condMore) {
         List<User> users = Dao.mUserDao.queryBuilder().where(cond, condMore).build().list();
+        return users;
+    }
+
+    /**
+     * 查询User表中所有数据
+     *
+     * @return 数据集合
+     */
+    public static List<User> queryUserAll() {
+        List<User> users = Dao.mUserDao.queryBuilder().list();
         return users;
     }
 
@@ -46,12 +58,22 @@ public class DBUtils {
         List<User> oldUsers = Dao.mUserDao.queryBuilder().where(cond).build().list();
         for (User oldUser : oldUsers) {
             try {
-                //不能设置id,否则变更不了
-                oldUser.setName(newUser.getName());
-                oldUser.setAge(newUser.getAge());
-                oldUser.setPhone(newUser.getPhone());
-                oldUser.setBoy(newUser.getBoy());
-                oldUser.setGirl(newUser.getGirl());
+                //判断newUser的各个字段是否为空
+                if (!TextUtils.isEmpty(newUser.getName())) {
+                    oldUser.setName(newUser.getName());
+                }
+                if (newUser.getAge() != 0) {
+                    oldUser.setAge(newUser.getAge());
+                }
+                if (!TextUtils.isEmpty(newUser.getPhone())) {
+                    oldUser.setPhone(newUser.getPhone());
+                }
+                if (newUser.getBoy() != 0) {
+                    oldUser.setBoy(newUser.getBoy());
+                }
+                if (newUser.getGirl() != 0) {
+                    oldUser.setGirl(newUser.getGirl());
+                }
                 Dao.mUserDao.update(oldUser);       //此处的更新操作必须保证对象的地址值是之前的地址值
                 updateCount++;
             } catch (Exception e) {

@@ -1,12 +1,11 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.base;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.FileInfo;
 import com.example.huangwenjian.retrofit_rxjava_mvp.listener.DownloadProgressListener;
 import com.example.huangwenjian.retrofit_rxjava_mvp.service.DownloadService;
-import com.example.huangwenjian.retrofit_rxjava_mvp.utils.FileUtils;
 import com.example.huangwenjian.retrofit_rxjava_mvp.utils.IOUtils;
 import com.example.huangwenjian.retrofit_rxjava_mvp.utils.UIUtils;
 
@@ -27,13 +26,19 @@ import rx.Subscriber;
  * 时间: 16/8/30
  */
 public class DownloadSubscriber extends Subscriber<ResponseBody> {
-    private Activity mActivity;
     private DownloadProgressListener mListener;
     private long mTotalLength;
+    private Context mContext;
+
+    public DownloadSubscriber() {
+    }
 
     public DownloadSubscriber(DownloadProgressListener listener) {
         this.mListener = listener;
-        this.mActivity = UIUtils.getActivity();
+    }
+
+    public void setDownloadProgressListener(DownloadProgressListener listener) {
+        this.mListener = listener;
     }
 
     @Override
@@ -53,22 +58,18 @@ public class DownloadSubscriber extends Subscriber<ResponseBody> {
             InputStream is = responseBody.byteStream();             //得到数据流
             MediaType mediaType = responseBody.contentType();       //得到文件的类型
             mTotalLength = responseBody.contentLength();              //得到content-length(文件大小);
-            mListener.onStart(mTotalLength);
 
             //设置FileInfo
             FileInfo fileInfo = new FileInfo();
             fileInfo.setType(0);
             fileInfo.setTotalLength(mTotalLength);
+            fileInfo.setFileName("11.jpg");
 
-            Intent intent = new Intent(mActivity, DownloadService.class);       //开启一个Service用于在后台下载文件
-            mActivity.startService(intent);
-
-            String downloadDir = FileUtils.getDownloadDir();
-            File targetFile = new File(downloadDir, fileInfo.getFileName());
-
-            //            ThreadManager.getSinglePool().execute(runn);
-            saveFile(is, targetFile);
-        } catch (IOException e) {
+            Intent intent = new Intent(mContext, DownloadService.class);       //开启一个Service用于在后台下载文件
+            intent.setAction(DownloadService.ACTION_START);
+            intent.putExtra("fileInfo", fileInfo);
+            mContext.startService(intent);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -76,6 +77,7 @@ public class DownloadSubscriber extends Subscriber<ResponseBody> {
     @Override
     public void onStart() {
         super.onStart();
+        mContext = UIUtils.getContext();
         System.out.println("下载开始了");
     }
 
