@@ -2,6 +2,7 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_dao;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.FatherDao;
 import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.PersonDao;
+import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.ThreadInfoDao;
 import com.example.huangwenjian.retrofit_rxjava_mvp.greendao.UserDao;
 
 /**
@@ -15,4 +16,5 @@ public class Dao {
     public static UserDao mUserDao;
     public static PersonDao mPersonDao;
     public static FatherDao mFatherDao;
+    public static ThreadInfoDao mThreadInfoDao;
 }

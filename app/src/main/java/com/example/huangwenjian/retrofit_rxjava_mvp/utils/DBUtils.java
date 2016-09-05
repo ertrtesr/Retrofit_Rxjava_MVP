@@ -3,6 +3,7 @@ package com.example.huangwenjian.retrofit_rxjava_mvp.utils;
 import android.text.TextUtils;
 
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_dao.Dao;
+import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_entity.ThreadInfo;
 import com.example.huangwenjian.retrofit_rxjava_mvp.entity.db_entity.User;
 
 import org.greenrobot.greendao.query.WhereCondition;
@@ -55,7 +56,7 @@ public class DBUtils {
      */
     public static int updateUser(User newUser, WhereCondition cond, WhereCondition... condMore) {
         int updateCount = 0;
-        List<User> oldUsers = Dao.mUserDao.queryBuilder().where(cond).build().list();
+        List<User> oldUsers = Dao.mUserDao.queryBuilder().where(cond, condMore).build().list();
         for (User oldUser : oldUsers) {
             try {
                 //判断newUser的各个字段是否为空
@@ -95,5 +96,55 @@ public class DBUtils {
             }
         }
         return deleteCount;
+    }
+
+    /*=============================== 往ThreadInfo表中插入数据 ===================================*/
+    public static void insertThread(ThreadInfo threadInfo) {
+
+    }
+
+    public static List<ThreadInfo> queryThread(WhereCondition cond, WhereCondition... condMore) {
+        List<ThreadInfo> threadInfos = Dao.mThreadInfoDao.queryBuilder().where(cond, condMore).build().list();
+        return threadInfos;
+    }
+
+    public static int updateThread(ThreadInfo newThreadInfo, WhereCondition cond, WhereCondition... condMore) {
+        int updateCount = 0;
+        List<ThreadInfo> oldThreadInfos = Dao.mThreadInfoDao.queryBuilder().where(cond, condMore).build().list();
+        for (ThreadInfo oldThreadInfo : oldThreadInfos) {
+            try {
+                oldThreadInfo.setUrl(TextUtils.isEmpty(newThreadInfo.getUrl()) ? oldThreadInfo.getUrl() : newThreadInfo.getUrl());
+                oldThreadInfo.setStart(newThreadInfo.getStart() == 0 ? 0 : newThreadInfo.getStart());
+                oldThreadInfo.setEnd(newThreadInfo.getEnd() == 0 ? 0 : newThreadInfo.getEnd());
+                oldThreadInfo.setFinished(newThreadInfo.getFinished() == 0 ? 0 : newThreadInfo.getFinished());
+                Dao.mThreadInfoDao.update(oldThreadInfo);
+                updateCount++;
+            } catch (Exception e) {
+                updateCount = -1;
+            }
+        }
+        return updateCount;
+    }
+
+    public static int deleteThread(WhereCondition cond, WhereCondition condMore) {
+        int deleteCount = 0;
+        List<ThreadInfo> threadInfos = queryThread(cond, condMore);
+        for (ThreadInfo threadInfo : threadInfos) {
+            try {
+                Dao.mThreadInfoDao.delete(threadInfo);
+                deleteCount++;
+            } catch (Exception e) {
+                deleteCount = -1;
+            }
+        }
+        return deleteCount;
+    }
+
+    public static boolean isExistThread(WhereCondition cond, WhereCondition condMore) {
+        List<ThreadInfo> threadInfos = queryThread(cond, condMore);
+        if (threadInfos != null && threadInfos.size() > 0) {
+            return true;
+        }
+        return false;
     }
 }

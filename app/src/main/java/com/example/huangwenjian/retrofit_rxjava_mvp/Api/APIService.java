@@ -30,5 +30,5 @@ public interface APIService {
 
     @Streaming
     @GET("11.jpg")
-    Observable<ResponseBody> download();
+    Observable<ResponseBody> downloadFile();
 }

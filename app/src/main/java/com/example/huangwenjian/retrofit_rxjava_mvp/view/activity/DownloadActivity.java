@@ -48,8 +48,8 @@ public class DownloadActivity extends Activity {
 
     @OnClick(R.id.btn_start_download)
     void startDownload() {
-        APIService service = RetrofitManager.getInstance(UIUtils.getContext(), "http://172.16.60.203:8080/").createService(APIService.class);
-        APIWrapper.doDownload(service.download(), new DownloadSubscriber());
+        APIService service = RetrofitManager.getInstance(UIUtils.getContext(), "http://192.168.31.105:8080/").createService(APIService.class);
+        APIWrapper.doDownload(service.downloadFile(), new DownloadSubscriber());
     }
 
     /**

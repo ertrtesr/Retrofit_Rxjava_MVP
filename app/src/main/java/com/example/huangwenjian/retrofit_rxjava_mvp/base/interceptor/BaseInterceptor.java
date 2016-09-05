@@ -1,5 +1,9 @@
 package com.example.huangwenjian.retrofit_rxjava_mvp.base.interceptor;
 
+import com.example.huangwenjian.retrofit_rxjava_mvp.event.UrlEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -24,9 +28,9 @@ public class BaseInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-
-        Request.Builder builder = chain.request()
-                .newBuilder();
+        Request request = chain.request();
+        Request.Builder builder = request.newBuilder();
+        EventBus.getDefault().post(new UrlEvent(request.url().toString()));     //向Subscriber类中传递url地址
         if (headers != null && headers.size() > 0) {
             Set<String> keys = headers.keySet();
             for (String headerKey : keys) {
@@ -34,6 +38,5 @@ public class BaseInterceptor implements Interceptor {
             }
         }
         return chain.proceed(builder.build());
-
     }
 }

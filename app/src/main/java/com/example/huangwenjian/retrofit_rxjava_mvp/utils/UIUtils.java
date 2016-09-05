@@ -7,7 +7,10 @@ import android.os.Handler;
 import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.huangwenjian.retrofit_rxjava_mvp.R;
 import com.example.huangwenjian.retrofit_rxjava_mvp.base.BaseApplication;
 
 /**
@@ -148,5 +151,9 @@ public class UIUtils {
 
     public static boolean isMainThread() {
         return Process.myTid() == getMainThreadid();
+    }
+
+    public static void setImage(String url, ImageView iv) {
+        Glide.with(getContext()).load(url).centerCrop().error(R.mipmap.ic_launcher).into(iv);
     }
 }

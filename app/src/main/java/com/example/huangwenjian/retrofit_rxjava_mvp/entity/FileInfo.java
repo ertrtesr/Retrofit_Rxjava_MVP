@@ -7,13 +7,45 @@ import java.io.Serializable;
  */
 public class FileInfo implements Serializable {
     private int id;                           //文件id
+    private String url;                       //url地址
     private String fileName;                  //文件名
-    private long downloadedLength;            //已经下载的长度
-    private long totalLength;                 //文件总大小
-    private int type;                         //文件类型
-    private String savePath;                  //文件存储位置
+    private long length;                       //文件总大小
+    private long finished;
+    private String downloadPath;              //文件存储位置
 
     public FileInfo() {
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public long getLength() {
+        return length;
+    }
+
+    public void setLength(long length) {
+        this.length = length;
+    }
+
+    public long getFinished() {
+        return finished;
+    }
+
+    public void setFinished(int finished) {
+        this.finished = finished;
+    }
+
+    public String getDownloadPath() {
+        return downloadPath;
+    }
+
+    public void setDownloadPath(String downloadPath) {
+        this.downloadPath = downloadPath;
     }
 
     public String getFileName() {
@@ -32,47 +64,16 @@ public class FileInfo implements Serializable {
         this.id = id;
     }
 
-    public long getTotalLength() {
-        return totalLength;
-    }
-
-    public void setTotalLength(long totalLength) {
-        this.totalLength = totalLength;
-    }
-
-    public long getDownloadedLength() {
-        return downloadedLength;
-    }
-
-    public void setDownloadedLength(long downloadedLength) {
-        this.downloadedLength = downloadedLength;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getSavePath() {
-        return savePath;
-    }
-
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
-    }
-
     @Override
     public String toString() {
         return "FileInfo{" +
                 "id=" + id +
+                ", url='" + url + '\'' +
                 ", fileName='" + fileName + '\'' +
-                ", totalLength=" + totalLength +
-                ", downloadedLength=" + downloadedLength +
-                ", type=" + type +
-                ", savePath='" + savePath + '\'' +
+                ", length=" + length +
+                ", finished=" + finished +
+                ", downloadPath='" + downloadPath + '\'' +
                 '}';
+
     }
 }

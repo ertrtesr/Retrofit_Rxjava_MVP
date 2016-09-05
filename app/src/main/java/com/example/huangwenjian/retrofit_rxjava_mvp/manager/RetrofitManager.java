@@ -117,21 +117,6 @@ public class RetrofitManager {
         return new RetrofitManager(context, baseUrl);
     }
 
-    public static RetrofitManager getDownLoadInstance(Context context) {
-        if (context != null) {
-            mContext = context;
-        }
-        return Singleton.DOWNLOAD_INSTANCE;
-    }
-
-    public static RetrofitManager getDownLoadInstance(Context context, String baseUrl) {
-        return null;
-    }
-
-    public static RetrofitManager getUpLoadInstance() {
-        return null;
-    }
-
     /**
      * 创建APIService
      *

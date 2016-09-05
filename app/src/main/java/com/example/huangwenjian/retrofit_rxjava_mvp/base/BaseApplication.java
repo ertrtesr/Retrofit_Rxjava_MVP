@@ -77,6 +77,7 @@ public class BaseApplication extends Application {
                 Dao.mUserDao = DBManager.getInstance(null).getDaoSession().getUserDao();
                 Dao.mPersonDao = DBManager.getInstance(null).getDaoSession().getPersonDao();
                 Dao.mFatherDao = DBManager.getInstance(null).getDaoSession().getFatherDao();
+                Dao.mThreadInfoDao = DBManager.getInstance(null).getDaoSession().getThreadInfoDao();
             }
         }).start();
     }
